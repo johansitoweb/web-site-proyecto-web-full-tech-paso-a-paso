@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleccionar Película</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <form action="{{ url_for('confirmar_pelicula') }}" method="POST">
+        <h2>Seleccione una película:</h2>
+
+        {% if peliculas %}
+            <div class="peliculas-lista">
+                {% for pelicula in peliculas %}
+                    <div class="pelicula">
+                        <label>
+                            <input type="radio" name="pelicula" value="{{ pelicula['nombre'] }}" required>
+                            <img src="{{ pelicula['imagen'] }}" alt="{{ pelicula['nombre'] }}">
+                            <h3>{{ pelicula['nombre'] }}</h3>
+                        </label>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No hay películas disponibles para tu edad.</p>
+        {% endif %}
+
+        <input type="hidden" name="nombre" value="{{ nombre }}">
+        <input type="hidden" name="edad" value="{{ edad }}">
+        <input type="hidden" name="fecha" value="{{ fecha }}">
+
+        <button type="submit">Confirmar</button>
+    </form>
+</body>
+</html>

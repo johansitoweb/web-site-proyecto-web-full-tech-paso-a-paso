@@ -1,0 +1,180 @@
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realizar Pago</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #1b1b1b;
+            color: #f5f5f5;
+            margin: 0;
+        }
+
+        h1 {
+            color: #f5f5f5;
+            margin-top: 20px;
+        }
+
+        form {
+            background-color: #4d4d4d;
+            padding: 20px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ecf0f1;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="number"], input[type="email"] {
+            width: 95%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: none;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+            font-size: 1em;
+        }
+
+        .card-inputs {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            margin-right: 10px;
+        }
+
+        button[type="submit"] {
+            background-color: #bc0606;
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #9e0000;
+        }
+
+        .payment-option {
+            margin-bottom: 15px;
+        }
+
+        .qr-code {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px dashed #ecf0f1;
+            border-radius: 5px;
+            text-align: center;
+            background-color: #34495e;
+        }
+
+        .total-price {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .entradas-display {
+            padding: 10px;
+            background-color: #3c3c3c;
+            border-radius: 5px;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pago de Entradas</h1>
+    <form action="{{ url_for('confirmar_pago') }}" method="POST">
+        <!-- Campos ocultos para enviar los datos adicionales -->
+        <input type="hidden" name="edad" value="{{ edad }}">
+        <input type="hidden" name="pelicula" value="{{ pelicula }}">
+        <input type="hidden" name="fecha" value="{{ fecha }}">
+        <input type="hidden" name="cantidad_entradas" value="{{ cantidad_entradas }}">
+        <input type="hidden" name="total" value="{{ total }}">
+
+        <label for="nombre">Nombre en la Tarjeta</label>
+        <input type="text" id="nombre" name="nombre" required>
+
+        <div class="payment-option">
+            <label>Tipo de Pago:</label>
+            <select id="tipo_pago" name="tipo_pago" onchange="mostrarOpcionesPago()" required>
+                <option value="" disabled selected>Seleccione una opción</option>
+                <option value="debito">Débito</option>
+                <option value="credito">Crédito</option>
+                <option value="mercado_pago">Mercado Pago</option>
+            </select>
+        </div>
+
+        <!-- Mostrar inputs de tarjeta solo si es necesario -->
+        <div id="inputsTarjeta" style="display: none;">
+            <label for="numero_tarjeta">Número de Tarjeta</label>
+            <input type="text" id="numero_tarjeta" name="numero_tarjeta" maxlength="19" placeholder="1234 5678 9123 4567" required>
+
+            <div class="card-inputs">
+                <div>
+                    <label for="fecha_expiracion">Fecha de Expiración</label>
+                    <input type="text" id="fecha_expiracion" name="fecha_expiracion" maxlength="5" placeholder="MM/YY" required>
+                </div>
+                <div>
+                    <label for="cvv">CVV</label>
+                    <input type="number" id="cvv" name="cvv" maxlength="3" required placeholder="123">
+                </div>
+            </div>
+        </div>
+
+        <!-- Mostrar QR solo si es mercado pago -->
+        <div id="qrCode" class="qr-code">
+            <p>Escanea el QR para completar el pago:</p>
+            <img src="static/img/qr_pago.png" alt="QR Code" width="150">
+            <p>Una vez escaneado, el pago se procesará.</p>
+        </div>
+
+        <div class="entradas-display">
+            Entradas seleccionadas: {{ cantidad_entradas }}
+        </div>
+
+        <div class="total-price">
+            Precio Total: ${{ total }}
+        </div>
+
+        <button type="submit">Pagar</button>
+    </form>
+
+    <script>
+        function mostrarOpcionesPago() {
+            var tipoPago = document.getElementById("tipo_pago").value;
+            var inputsTarjeta = document.getElementById("inputsTarjeta");
+            var qrCode = document.getElementById("qrCode");
+
+            if (tipoPago == "debito" || tipoPago == "credito") {
+                inputsTarjeta.style.display = "block";
+                qrCode.style.display = "none";
+            } else if (tipoPago == "mercado_pago") {
+                inputsTarjeta.style.display = "none";
+                qrCode.style.display = "block";
+            } else {
+                inputsTarjeta.style.display = "none";
+                qrCode.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+[
+    {
+        "nombre": "Federico Egea",
+        "edad": "18",
+        "contrase\u00f1a": "1234",
+        "mail": "fede10egea@gmail.com"
+    },
+    {
+        "nombre": "Ariel",
+        "edad": "53",
+        "contrase\u00f1a": "1234",
+        "mail": "ariel@gmail.com"
+    },
+    {
+        "nombre": "Bautista",
+        "edad": "23",
+        "contrase\u00f1a": "1234",
+        "mail": "bautista@gmail.com"
+    },
+    {
+        "nombre": "Federico Egea",
+        "edad": "19",
+        "contrase\u00f1a": "1234",
+        "mail": "fegea@uade.edu.ar"
+    },
+    {
+        "nombre": "Roman",
+        "edad": "5",
+        "contrase\u00f1a": "1234",
+        "mail": "roman@gmail.com"
+    }
+]

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto Cine | Inicio</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="static/img/logo2.png" alt="Logo de Proyecto Cine" class="logo">
+            <nav>
+                <ul class="menu">
+                    <li><a href="/">Inicio</a></li>
+                    <li><a href="/crear_usuario">Crear Usuario</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mostrar mensajes de error -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="flash-messages">
+                <ul>
+                    {% for message in messages %}
+                        <li style="color: red;">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <section id="login">
+        <h2>Ingreso de Usuario</h2>
+        <form action="{{ url_for('iniciar_sesion') }}" method="POST">     
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+            <label for="contraseña">Contraseña:</label>
+            <input type="password" id="contraseña" name="contraseña" required>
+            <button type="submit">Iniciar Sesión</button>
+        </form>        
+
+        <!-- Mensaje para crear un nuevo usuario -->
+        <div style="text-align: center; margin-top: 20px;">
+            <p>¿No tienes un usuario? <a href="{{ url_for('crear_usuario') }}">Presiona aquí para crearlo.</a></p>
+        </div>
+    </section><br><br>
+
+    <footer class="footer_inicio_sesion">
+        <p class="p_footer">&copy; 2024 Proyecto Cine. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>

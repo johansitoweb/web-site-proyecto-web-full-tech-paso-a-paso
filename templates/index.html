@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proyecto Cine | Inicio</title>
+    <link rel="stylesheet" href="static/style.css" />
+</head>
+
+<body>
+    <header>
+        <div class="header-content">
+            <img src="static/img/logo2.png" alt="Logo de Proyecto Cine" class="logo" />
+        </div>
+    </header>
+
+    <main>
+        <!-- Título centrado de la cartelera -->
+        <h2>Cartelera</h2>
+
+        <!-- Contenedor de películas con formulario -->
+        <form id="cartelera" method="POST" action="/seleccionar-pelicula">
+            <!-- Película 1 -->
+            <div class="pelicula">
+                <img src="static/img/venom.jpg" alt="Venom El Último Baile" />
+                <h3>Venom El Último Baile</h3>
+            </div>
+
+            <!-- Película 2 -->
+            <div class="pelicula">
+                <img src="static/img/terrifier-3.jpg" alt="Terrifier 3 El Payaso Siniestro" />
+                <h3>Terrifier 3 El Payaso Siniestro</h3>
+            </div>
+
+            <!-- Película 3 -->
+            <div class="pelicula">
+                <img src="static/img/sonrie2.jpg" alt="Sonríe 2" />
+                <h3>Sonríe 2</h3>
+            </div>
+
+            <!-- Película 4 -->
+            <div class="pelicula">
+                <img src="static/img/robot-salvaje.jpg" alt="Robot Salvaje" />
+                <h3>Robot Salvaje</h3>
+            </div>
+
+            <!-- Película 5 -->
+
+            <div class="pelicula">
+                <img src="static/img/la-leyenda-del-dragon.jpg" alt="La Leyenda Del Dragón" />
+                <h3>La Leyenda Del Dragón</h3>
+            </div>
+        </form>
+
+        <!-- Sección de usuario -->
+        <section id="usuario">
+            <!-- Botón para crear usuario -->
+            <a href="{{ url_for('crear_usuario') }}">
+                <button>Crear Usuario</button>
+            </a>
+            <!-- Botón para ingresar datos -->
+            <a href="{{ url_for('iniciar_sesion') }}">
+                <button>Inicar Sesion</button>
+            </a>
+        </section>
+    </main>
+</body>
+
+</html>

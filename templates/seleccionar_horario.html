@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleccionar Horario</title>
+    <link rel="stylesheet" href="static\style.css">
+</head>
+<body><br><br>
+    <h1>Selecciona el Horario</h1>
+    <form action="{{ url_for('seleccionar_pelicula') }}" method="POST">
+        <label for="horario">Horario:</label>
+        <select id="horario" name="horario" required>
+            <option value="12:00">12:00 PM</option>
+            <option value="15:00">3:00 PM</option>
+            <option value="18:00">6:00 PM</option>
+            <option value="21:00">9:00 PM</option>
+        </select><br><br>
+        
+        <input type="hidden" name="nombre" value="{{ nombre }}">
+        <input type="hidden" name="edad" value="{{ edad }}">
+        <input type="hidden" name="fecha" value="{{ fecha }}">
+        
+        <button type="submit">Confirmar Horario</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imprimir Entrada</title>
+    <link rel="stylesheet" href="static/entrada.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Resumen de tu Entrada</h1>
+        <div id="resumen-pago">
+            <p><strong>Nombre:</strong> {{ nombre }}</p>
+            <p><strong>Edad:</strong> {{ edad }}</p>
+            <p><strong>Película:</strong> {{ pelicula }}</p>
+            <p><strong>Fecha:</strong> {{ fecha }}</p>
+            <p><strong>Cantidad de Entradas:</strong> {{ cantidad_entradas }}</p>
+            <p class="total"><strong>Total:</strong> ${{ total }}</p>
+        </div>
+
+        <!-- Aquí estamos usando GET para simplemente visualizar los detalles -->
+        <form action="{{ url_for('descargar_pdf') }}" method="POST">
+            <input type="hidden" name="nombre" value="{{ nombre }}">
+            <input type="hidden" name="edad" value="{{ edad }}">
+            <input type="hidden" name="pelicula" value="{{ pelicula }}">
+            <input type="hidden" name="fecha" value="{{ fecha }}">
+            <input type="hidden" name="horario" value="{{horario}}">
+            <input type="hidden" name="cantidad_entradas" value="{{ cantidad_entradas }}">
+            <input type="hidden" name="total" value="{{ total }}">
+            <button type="submit">Descargar Entrada en PDF</button>
+        </form>
+    </div>
+</body>
+</html>
